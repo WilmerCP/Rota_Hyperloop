@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROTA Hyperloop</title>
+    <link rel="stylesheet" href="../css/mainWindow.css">
+</head>
+<body>
+    <div id="container">
+
+        <section id="s1">
+
+            <h2>Konum</h2>
+
+            <div id="position" class="coordinates">
+
+                <div class="c1">
+                    <h3>X</h3>
+                    <span id="px">45 m</span>
+                </div>
+                <div class="c2">
+                    <h3>Y</h3>
+                    <span id="py">0 m</span>
+                </div>
+
+                <div class="c3">
+                    <h3>Z</h3>
+                    <span id="pz">0 m</span>
+                </div>
+
+            </div>
+
+            <h2>Hız</h2>
+
+            <div id="velocity" class="coordinates">
+
+                <div class="c1">
+                    <h3>X</h3>
+                    <span id="vx">0 m/s</span>
+                </div>
+                <div class="c2">
+                    <h3>Y</h3>
+                    <span id="vy">0 m/s</span>
+                </div>
+
+                <div class="c3">
+                    <h3>Z</h3>
+                    <span id="vz">0 m/s</span>
+                </div>
+
+            </div>
+
+            <h2>İvme</h2>
+
+            <div id="velocity" class="coordinates">
+
+                <div class="c1">
+                    <h3>X</h3>
+                    <span id="vx">0 m/s²</span>
+                </div>
+                <div class="c2">
+                    <h3>Y</h3>
+                    <span id="vy">0 m/s²</span>
+                </div>
+
+                <div class="c3">
+                    <h3>Z</h3>
+                    <span id="vz">0 m/s²</span>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="s2">
+
+            <div id="rpy" class="coordinates">
+
+                <div class="c1">
+                    <h3>Roll</h3>
+                    <span id="roll">00°</span>
+                </div>
+                <div class="c2">
+                    <h3>Pitch</h3>
+                    <span id="pitch">00°</span>
+                </div>
+
+                <div class="c3">
+                    <h3>Yaw</h3>
+                    <span id="yaw">00°</span>
+                </div>
+
+            </div>
+
+            <div class="speedometer">
+                <div class="needle"></div>
+                <div class="needle-cover"></div>
+            </div>
+
+            <div id="progress_bar">
+                <div id="progress_fill"></div>
+                <span id="progress_text">45m / 186m</span>
+            </div>
+
+        </section>
+
+        <section id="s3">
+
+            <h2>Enerji</h2>
+
+            <div id="energy">
+                
+                <div class="energy_column">
+                    <h3>İtki</h3>
+                    <div class="battery">
+    
+                        <div class="charge" id="motor_battery"></div>
+        
+                    </div>
+                </div>
+
+                <div class="energy_column">
+                    <h3>Aksesuar</h3>
+
+    
+                    <div class="battery">
+        
+                        <div class="charge" id="accesory_battery"></div>
+        
+                    </div>
+                </div>
+                
+            </div>
+
+            <h2>Kapsül basıncı</h2>
+            <span id="pressure">0kPa</span>
+
+            <h2>Sıcaklık</h2>
+
+            <div id="temperature">
+                
+                <div class="temp_column">
+                    <h3>T1</h3>
+                    <span id="t1">0°C</span>
+                </div>
+
+                <div class="temp_column">
+                    <h3>T2</h3>
+                    <span id="t2">0°C</span>
+                </div>
+
+                <div class="temp_column">
+                    <h3>T3</h3>
+                    <span id="t3">0°C</span>
+                </div>
+
+                <div class="temp_column">
+                    <h3>T4</h3>
+                    <span id="t4">0°C</span>
+                </div>
+                
+            </div>
+
+        </section>
+
+        <section id="s4">
+
+            <button id="start">Başla</button>
+            <button id="levitation">Levitasiyon</button>
+            <button id="impulse">İtki</button>
+            <button id="stop">Acil Durdurma</button>
+
+        </section>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,269 @@
+*{
+
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+html, body{
+
+    width: 100%;
+    height: 100%;
+}
+
+#container{
+
+    display: grid;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    padding: 5px;
+
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 80% 20%;
+
+}
+
+section{
+
+    grid-column: span 1;
+    grid-row: span 1;
+
+}
+
+#s1{
+
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    flex-wrap: nowrap; 
+    gap: 5px;
+
+}
+
+#s2 {
+
+    display: flex;
+    flex-direction: row; 
+    justify-content: center; 
+    align-items: center; 
+    flex-wrap: wrap; 
+}
+
+#s2 > * {
+    flex: 0 0 auto; /* Prevent children from growing or shrinking */
+}
+
+
+.speedometer{
+
+    width: 280px;
+    height: 280px;
+    padding: 50px;
+    border-radius: 50%;
+    background: radial-gradient(#fff 0 0) content-box,
+    conic-gradient(
+        from -90deg,
+        red 36deg,
+        rgb(255, 136, 0) 0 72deg,
+        yellow 0 108deg,
+        rgb(215, 238, 14) 0 144deg,
+        rgb(10, 184, 10) 0 180deg,
+        #0000 0
+    );
+    position: relative;
+    margin-bottom: -150px;
+
+}
+
+.needle{
+
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 50%;
+    top: 50%;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 100px solid black;
+    transform-origin: bottom center;
+    transform: translate(-50%, -100%) rotate(-40deg);
+}
+
+.needle-cover {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: black;
+    border-radius: 50%;
+    top: 45%;
+    transform: translateY(-50%);
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+#progress_bar{
+
+    background-color: rgb(205, 252, 255);
+    width: 90%;
+    height: 35px;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+
+}
+
+#progress_fill{
+
+    background-color: #340CFA;
+    width: 45%;
+    height: 100%;
+
+}
+
+#progress_text{
+
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    font-weight: bold;
+
+}
+
+
+#s3{
+
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    flex-wrap: nowrap; 
+    gap: 10px;
+
+}
+
+#energy,#temperature{
+
+    width: 100%;
+    padding: 5px 0px 15px 0px;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+}
+
+#energy h3, #temperature h3{
+
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    font-weight: normal;
+
+}
+
+.energy_column, .temp_column{
+
+    width: 50%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+
+.battery{
+
+    width: 65%;
+    min-height: 40px;
+    border: solid;
+    border-radius: 10px;
+    border-width: 4px;
+    border-color: #5f4cc0;
+    background-color: #fff;
+    padding: 4px;
+    position: relative;
+
+}
+
+.battery::before{
+
+    position: absolute;
+    content: "";
+    right: -10px;
+    top: 50%;
+    bottom: 0;
+    background-color: #5f4cc0;
+    height: 20px;
+    width: 10px;
+    transform: translateY(-50%);
+    border-radius: 0px 4px 4px 0px;
+    
+}
+
+.charge{
+
+    width: 70%;
+    height: 100%;
+    background-color: #5f4cc0;
+
+}
+
+#motor_battery{
+
+    width: 45%;
+
+}
+
+#s4{
+
+    grid-column: span 3;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+
+}
+
+button{
+
+    background-color: #340CFA;
+    color: white;
+    padding: 15px;
+    border: none;
+    width: 130px;
+
+}
+
+.coordinates{
+
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    height: auto;
+    width: auto;
+    gap: 15px;
+    margin-bottom: 5px;
+
+}
+
+.coordinates > div{
+
+    grid-column: span 1;
+    text-align: center;
+
+}
+
+#stop{
+
+    background-color: rgb(168, 12, 12);
+
+}
