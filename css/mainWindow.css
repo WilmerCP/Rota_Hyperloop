@@ -13,6 +13,25 @@ html, body{
     height: 100%;
 }
 
+#splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 1.5s ease-in-out;
+  }
+  
+  #splash-screen img {
+    max-width: 380px;
+    margin-top: -30px;
+  }
+
 #container{
 
     display: grid;
@@ -44,6 +63,46 @@ section{
 
 }
 
+label{
+
+    margin-top: 5px;
+    font-weight: bold;
+
+}
+
+#ip{
+
+
+    padding: 5px 12px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #24292e;
+    vertical-align: middle;
+    background-color: #ffffff;
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    border: 1px solid #4d4d4d;
+    border-radius: 6px;
+    outline: none;
+    box-shadow: rgba(225, 228, 232, 0.2) 0px 1px 0px 0px inset;
+    :focus{
+        border-color: #0366d6;
+        outline: none;
+        box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+    }
+    
+
+
+}
+
+#connect{
+
+    padding: 8px 14px 8px 14px;
+    width: auto;
+    margin-top: 5px;
+
+}
+
 #s2 {
 
     display: flex;
@@ -67,11 +126,11 @@ section{
     background: radial-gradient(#fff 0 0) content-box,
     conic-gradient(
         from -90deg,
-        red 36deg,
-        rgb(255, 136, 0) 0 72deg,
+        rgb(10, 184, 10) 36deg,
+        rgb(215, 238, 14) 0 72deg,
         yellow 0 108deg,
-        rgb(215, 238, 14) 0 144deg,
-        rgb(10, 184, 10) 0 180deg,
+        rgb(255, 136, 0) 0 144deg,
+        red 0 180deg,
         #0000 0
     );
     position: relative;
@@ -120,7 +179,7 @@ section{
 #progress_fill{
 
     background-color: #340CFA;
-    width: 45%;
+    width: 50%;
     height: 100%;
 
 }
@@ -154,7 +213,7 @@ section{
     margin: 0;
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
 
 }
 
@@ -186,7 +245,7 @@ section{
     border: solid;
     border-radius: 10px;
     border-width: 4px;
-    border-color: #5f4cc0;
+    border-color: #340CFA;
     background-color: #fff;
     padding: 4px;
     position: relative;
@@ -200,7 +259,7 @@ section{
     right: -10px;
     top: 50%;
     bottom: 0;
-    background-color: #5f4cc0;
+    background-color: #340CFA;
     height: 20px;
     width: 10px;
     transform: translateY(-50%);
@@ -212,7 +271,7 @@ section{
 
     width: 70%;
     height: 100%;
-    background-color: #5f4cc0;
+    background-color: #340CFA;
 
 }
 
@@ -241,7 +300,23 @@ button{
     padding: 15px;
     border: none;
     width: 130px;
+    box-shadow: 0px 8px 12px -7px #276873;
+    border-radius:8px;
+    cursor:pointer;
+    text-shadow:0px 1px 0px #3d768a;
+    transition: background-color 0.4s ease;
 
+
+}
+
+button:hover{
+
+    background-color: rgb(0, 128, 64);
+}
+
+button:active {
+	position:relative;
+	top:1px;
 }
 
 .coordinates{
@@ -266,4 +341,9 @@ button{
 
     background-color: rgb(168, 12, 12);
 
+}
+
+#stop:hover{
+
+    background-color: rgb(218, 22, 22);
 }

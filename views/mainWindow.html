@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="../css/mainWindow.css">
 </head>
 <body>
+    <div id="splash-screen">
+        <img src="../assets/rota_logo.png" alt="Logo">
+      </div>
     <div id="container">
 
         <section id="s1">
@@ -53,7 +56,7 @@
 
             <h2>İvme</h2>
 
-            <div id="velocity" class="coordinates">
+            <div id="acceleration" class="coordinates">
 
                 <div class="c1">
                     <h3>X</h3>
@@ -70,6 +73,10 @@
                 </div>
 
             </div>
+
+            <label for="ip">Static IP</label>
+            <input type="text" id="ip" name="ip" placeholder="">
+            <button id="connect">Bağlan</button>
 
         </section>
 
@@ -141,25 +148,39 @@
             <div id="temperature">
                 
                 <div class="temp_column">
-                    <h3>T1</h3>
+                    <h3>Motor 1</h3>
                     <span id="t1">0°C</span>
                 </div>
 
                 <div class="temp_column">
-                    <h3>T2</h3>
+                    <h3>Motor 2</h3>
                     <span id="t2">0°C</span>
                 </div>
 
                 <div class="temp_column">
-                    <h3>T3</h3>
+                    <h3>Batarya 1</h3>
                     <span id="t3">0°C</span>
                 </div>
 
                 <div class="temp_column">
-                    <h3>T4</h3>
+                    <h3>Batarya 2</h3>
                     <span id="t4">0°C</span>
                 </div>
+
+                <div class="temp_column">
+                    <h3>Batarya 3</h3>
+                    <span id="t5">0°C</span>
+                </div>
+
+                <div class="temp_column">
+                    <h3>Batarya 4</h3>
+                    <span id="t6">0°C</span>
+                </div>
                 
+                <div class="temp_column">
+                    <h3>Ortam</h3>
+                    <span id="t7">0°C</span>
+                </div>
             </div>
 
         </section>
@@ -167,6 +188,7 @@
         <section id="s4">
 
             <button id="start">Başla</button>
+            <button id="lift">Yükarı</button>
             <button id="levitation">Levitasiyon</button>
             <button id="impulse">İtki</button>
             <button id="stop">Acil Durdurma</button>
@@ -174,5 +196,6 @@
         </section>
 
     </div>
+    <script src="../src/mainWindow.js"></script>
 </body>
 </html>

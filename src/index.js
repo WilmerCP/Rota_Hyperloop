@@ -3,6 +3,14 @@ const { app, BrowserWindow, Menu } = require("electron");
 const url = require("url");
 const path = require("path");
 
+let iconPath;
+
+  if (process.platform === 'win32') {
+    iconPath = path.join(__dirname, '../assets', 'favicon.ico');
+  } else if (process.platform === 'linux') {
+    iconPath = path.join(__dirname, '../assets', 'favicon-32x32.png');
+  }
+
 
 try {
     require('electron-reloader')(module)
@@ -19,7 +27,11 @@ const indexUrl = url.format({
 
 app.on("ready",()=>{
 
-    mainWindow = new BrowserWindow({ title: "Rota Hyperloop"});
+    mainWindow = new BrowserWindow({ 
+        
+        title: "Rota Hyperloop",
+        icon: iconPath
+    });
     
     mainWindow.loadURL(indexUrl);
 
