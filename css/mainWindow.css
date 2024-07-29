@@ -21,6 +21,8 @@ html, body{
     height: 100%;
     background-color: white;
     display: flex;
+    flex-direction: column;
+    gap: 30px;
     align-items: center;
     justify-content: center;
     z-index: 9999;
@@ -138,7 +140,57 @@ label{
 
 }
 
-.needle{
+#half-way-indicator{
+
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: -18px;
+    font-size: 14px;
+
+}
+
+#third-indicator{
+
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    transform: rotate(40deg);
+    font-size: 14px;
+
+}
+
+#second-indicator{
+
+    position: absolute;
+    left: 20px;
+    top: 15px;
+    transform: rotate(-40deg);
+    font-size: 14px;
+
+}
+
+.speedometer::before{
+
+    position: absolute;
+    content: '0 m/s';
+    left: 5px;
+    top: 51%;
+    font-size: 14px;
+
+}
+
+.speedometer::after{
+
+    position: absolute;
+    content: '200 m/s';
+    right: 0px;
+    top: 51%;
+    font-size: 14px;
+    
+}
+
+#needle{
 
     position: absolute;
     width: 0;
@@ -149,7 +201,8 @@ label{
     border-right: 10px solid transparent;
     border-bottom: 100px solid black;
     transform-origin: bottom center;
-    transform: translate(-50%, -100%) rotate(-40deg);
+    transform: translate(-50%, -100%) rotate(-90deg);
+    transition: transform 0.2s ease-in-out;
 }
 
 .needle-cover {
@@ -178,9 +231,10 @@ label{
 
 #progress_fill{
 
-    background-color: #340CFA;
+    background-color: #293991;
     width: 50%;
     height: 100%;
+    transition: width 0.2s ease-in-out;
 
 }
 
@@ -240,12 +294,12 @@ label{
 
 .battery{
 
-    width: 55%;
+    width: 50%;
     min-height: 40px;
     border: solid;
     border-radius: 10px;
     border-width: 4px;
-    border-color: #340CFA;
+    border-color: #293991;
     background-color: #fff;
     padding: 4px;
     position: relative;
@@ -261,7 +315,7 @@ label{
     right: -10px;
     top: 50%;
     bottom: 0;
-    background-color: #340CFA;
+    background-color: #293991;
     height: 20px;
     width: 10px;
     transform: translateY(-50%);
@@ -273,7 +327,7 @@ label{
 
     width: 70%;
     height: 100%;
-    background-color: #340CFA;
+    background-color: rgb(10, 77, 97);
 
 }
 
@@ -297,7 +351,7 @@ label{
 
 button{
 
-    background-color: #340CFA;
+    background-color: #293991;
     color: white;
     padding: 15px;
     border: none;
@@ -348,4 +402,10 @@ button:active {
 #stop:hover{
 
     background-color: rgb(218, 22, 22);
+}
+
+.active{
+
+    background-color: rgb(1, 112, 57);;
+
 }

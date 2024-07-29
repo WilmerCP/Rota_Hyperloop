@@ -9,6 +9,7 @@
 <body>
     <div id="splash-screen">
         <img src="../assets/rota_logo.png" alt="Logo">
+        <h3>Başlamak için tıkla veya enter/boşluk tuşuna basınız</h3>
       </div>
     <div id="container">
 
@@ -20,7 +21,7 @@
 
                 <div class="c1">
                     <h3>X</h3>
-                    <span id="px">45 m</span>
+                    <span id="px">0 m</span>
                 </div>
                 <div class="c2">
                     <h3>Y</h3>
@@ -101,7 +102,10 @@
             </div>
 
             <div class="speedometer">
-                <div class="needle"></div>
+                <span id="second-indicator">50 m/s</span>
+                <span id="half-way-indicator">100 m/s</span>
+                <span id="third-indicator">150 m/s</span>
+                <div id="needle"></div>
                 <div class="needle-cover"></div>
             </div>
 
@@ -188,7 +192,7 @@
         <section id="s4">
 
             <button id="start">Başla</button>
-            <button id="lift">Yükarı</button>
+            <button id="lift">Kaldır</button>
             <button id="levitation">Levitasiyon</button>
             <button id="impulse">İtki</button>
             <button id="stop">Acil Durdurma</button>

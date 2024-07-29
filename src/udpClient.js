@@ -37,7 +37,7 @@ function sendSensorData(data_name,value){
 
 }
 
-sendSensorData('accessory_battery',0);
+sendSensorData('position_x',140);
 
 /*
 

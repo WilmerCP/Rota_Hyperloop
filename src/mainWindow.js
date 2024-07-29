@@ -1,3 +1,11 @@
+let train = {
+
+    up: false,
+    levitating: false,
+    moving: false
+
+}
+
 const splashScreen = document.getElementById('splash-screen');
 
 // Event handler functions
@@ -14,7 +22,7 @@ function handleFadeOut() {
 }
 
 function handleKeydown(event) {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' || event.key === ' ') {
         handleFadeOut();
     }
 }
@@ -23,6 +31,103 @@ function handleKeydown(event) {
 document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener('click', handleFadeOut);
     document.addEventListener('keydown', handleKeydown);
+
+    connectButton.addEventListener('click', () => {
+        const ip = document.getElementById('ip').value;
+        if (ip) {
+            sendCommand('connect_sensors');
+        }
+    });
+
+    liftButton.addEventListener('click', () => {
+
+        if (train.up == false && train.moving == false) {
+
+            sendCommand('lift_train');
+            liftButton.classList.add('active');
+            liftButton.innerHTML = 'İndir';
+            train.up = true;
+
+        } else if (train.up == true) {
+
+            sendCommand('lower_train');
+            liftButton.classList.remove('active');
+            liftButton.innerHTML = 'Kaldır';
+            train.up = false;
+
+        }
+
+    });
+
+    levitationButton.addEventListener('click', () => {
+
+        if (train.levitating == false && train.up == true) {
+
+            sendCommand('start_levitation');
+            levitationButton.classList.add('active');
+            train.levitating = true;
+
+        } else if (train.levitating == true && train.moving == false) {
+
+            sendCommand('stop_levitation');
+            levitationButton.classList.remove('active');
+            startButton.classList.remove('active');
+            train.levitating = false;
+
+        }
+
+    });
+
+    impulseButton.addEventListener('click', () => {
+
+        if (train.moving == false) {
+
+            sendCommand('start_motor');
+            impulseButton.classList.add('active');
+            train.moving = true;
+
+        } else {
+
+            sendCommand('stop_motor');
+            impulseButton.classList.remove('active');
+            startButton.classList.remove('active');
+            train.moving = false;
+
+        }
+
+    });
+
+    startButton.addEventListener('click', () => {
+
+        if (train.moving == false && train.up == false && train.levitating == false) {
+
+            sendCommand('start_train');
+            startButton.classList.add('active');
+            levitationButton.classList.add('active');
+            impulseButton.classList.add('active');
+            train.levitating = true;
+            train.moving = true;
+
+        }
+
+
+    });
+
+    stopButton.addEventListener('click', () => {
+
+        sendCommand('emergency_stop');
+        train.moving = false;
+        train.levitating = false;
+        train.up = false;
+
+        startButton.classList.remove('active');
+        levitationButton.classList.remove('active');
+        impulseButton.classList.remove('active');
+        liftButton.classList.remove('active');
+
+    });
+
+
 });
 
 
@@ -41,6 +146,11 @@ let dataHandler = function (json_data) {
             case 'velocity_x':
 
                 printData('vx', json_data.value + ' m/s');
+
+                let needle = document.getElementById('needle');
+
+                needle.style.transform = 'translate(-50%, -100%) rotate('+String(-90 + json_data.value*180/200)+'deg)';
+
 
                 break;
 
@@ -61,7 +171,7 @@ let dataHandler = function (json_data) {
                 printData('px', json_data.value + ' m');
                 printData('progress_text', json_data.value + ' / 186m');
 
-                document.getElementById('progress_fill').style.width = String(json_data.value*100/186)+'%';
+                document.getElementById('progress_fill').style.width = String(json_data.value * 100 / 186) + '%';
 
                 break;
 
@@ -113,21 +223,21 @@ let dataHandler = function (json_data) {
 
                 break;
 
-                case 'pressure':
+            case 'pressure':
 
                 printData('pressure', json_data.value + 'kPa');
 
                 break;
 
-                case 'motor_battery':
+            case 'motor_battery':
 
-                document.getElementById('motor_battery').style.width = String(json_data.value*100/680)+'%';
+                document.getElementById('motor_battery').style.width = String(json_data.value * 100 / 680) + '%';
 
                 break;
 
-                case 'accesory_battery':
+            case 'accesory_battery':
 
-                document.getElementById('accesory_battery').style.width = String(json_data.value*100/16.8)+'%';
+                document.getElementById('accesory_battery').style.width = String(json_data.value * 100 / 16.8) + '%';
 
                 break;
 
@@ -161,3 +271,17 @@ window.ipc.onData((e, data) => {
     }
 
 });
+
+const connectButton = document.getElementById('connect');
+const startButton = document.getElementById('start');
+const liftButton = document.getElementById('lift');
+const levitationButton = document.getElementById('levitation');
+const impulseButton = document.getElementById('impulse');
+const stopButton = document.getElementById('stop');
+
+
+let sendCommand = function (command) {
+
+    window.ipc.sendCommand(command);
+
+};

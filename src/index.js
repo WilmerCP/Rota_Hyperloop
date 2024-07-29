@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu } = require("electron");
+const { app, BrowserWindow, Menu, ipcMain } = require("electron");
 const { Worker } = require('worker_threads');
 
 const url = require("url");
@@ -47,7 +47,7 @@ app.on("ready",()=>{
 
     Menu.setApplicationMenu(mainMenu);
 
-    mainWindow.webContents.openDevTools();
+    //mainWindow.webContents.openDevTools();
 
     let udp_thread = new Worker(path.join(__dirname,'/udpServer.js'));
 
@@ -58,6 +58,13 @@ app.on("ready",()=>{
     });
 
 });
+
+  ipcMain.on('command',(e,data)=>{
+
+    console.log(data);  
+
+  });
+
 
 // Handle SIGINT to clean up workers
 process.on('SIGINT', () => {

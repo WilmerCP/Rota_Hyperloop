@@ -6,6 +6,12 @@ let ipc_object = {
 
         ipcRenderer.on('sensor-data',callback);
 
+    },
+
+    'sendCommand' : function(command){
+
+        ipcRenderer.send('command', command);
+
     }
 
 }
