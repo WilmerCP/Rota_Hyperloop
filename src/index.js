@@ -4,66 +4,116 @@ const { Worker } = require('worker_threads');
 const url = require("url");
 const path = require("path");
 
+let connected = false;
+let tcp_thread
+let udp_thread
+
 let iconPath;
 
-  if (process.platform === 'win32') {
-    iconPath = path.join(__dirname, '../assets', 'favicon.ico');
-  } else if (process.platform === 'linux') {
-    iconPath = path.join(__dirname, '../assets', 'favicon-32x32.png');
-  }
+if (process.platform === 'win32') {
+  iconPath = path.join(__dirname, '../assets', 'favicon.ico');
+} else if (process.platform === 'linux') {
+  iconPath = path.join(__dirname, '../assets', 'favicon-32x32.png');
+}
 
 
 try {
-    require('electron-reloader')(module)
-  } catch (_) {}
+  require('electron-reloader')(module)
+} catch (_) { }
 
 let mainWindow;
 const indexUrl = url.format({
 
-    protocol: 'file',
-    pathname: path.join(__dirname,'../views/mainWindow.html'),
-    slashes:true
+  protocol: 'file',
+  pathname: path.join(__dirname, '../views/mainWindow.html'),
+  slashes: true
 
 })
 
-app.on("ready",()=>{
+app.on("ready", () => {
 
-    mainWindow = new BrowserWindow({ 
-        
-        title: "Rota Hyperloop",
-        icon: iconPath,
-        webPreferences:{
+  mainWindow = new BrowserWindow({
 
-          contextIsolation: true,
-          nodeIntegration: false,
-          preload: path.join(__dirname,'preload.js')
+    title: "Rota Hyperloop",
+    icon: iconPath,
+    webPreferences: {
 
-        }
-    });
-    
-    mainWindow.loadURL(indexUrl);
+      contextIsolation: true,
+      nodeIntegration: false,
+      preload: path.join(__dirname, 'preload.js')
 
-    const mainMenu = Menu.buildFromTemplate([]);
+    }
+  });
 
-    Menu.setApplicationMenu(mainMenu);
+  mainWindow.loadURL(indexUrl);
 
-    //mainWindow.webContents.openDevTools();
+  const mainMenu = Menu.buildFromTemplate([]);
 
-    let udp_thread = new Worker(path.join(__dirname,'/udpServer.js'));
+  Menu.setApplicationMenu(mainMenu);
 
-    udp_thread.on('message', (data)=>{
+  //mainWindow.webContents.openDevTools();
 
-      mainWindow.webContents.send('sensor-data',data);
-
-    });
 
 });
 
-  ipcMain.on('command',(e,data)=>{
+ipcMain.on('command', (e, data) => {
 
-    console.log(data);  
+  switch (data) {
 
-  });
+    case 'connect_sensors':
+
+      if (connected == false) {
+
+        console.log('hola')
+
+        tcp_thread = new Worker(path.join(__dirname, '/tcpClient.js'));
+
+        tcp_thread.on('message', (msg) => {
+
+          console.log(msg.description);
+
+          if(msg.type == 'close'){
+
+            if(connected == true){
+
+              udp_thread.terminate();
+
+            }
+
+            connected = false;
+
+          }else if(msg.description == 'connected'){
+
+            connected = true;
+
+            udp_thread = new Worker(path.join(__dirname, '/udpServer.js'));
+
+            udp_thread.on('message', (data) => {
+    
+              mainWindow.webContents.send('sensor-data', data);
+    
+            });
+
+          }
+
+        });
+
+      }
+
+      break;
+
+    default:
+
+      if (connected) {
+
+        tcp_thread.postMessage(data);
+
+      }
+
+      break;
+  }
+
+});
 
 
 // Handle SIGINT to clean up workers
@@ -74,6 +124,16 @@ process.on('SIGINT', () => {
     udp_thread.terminate(() => {
       console.log('UDP Worker terminated');
     });
+  }
+
+  if (tcp_thread) {
+
+    tcp_thread.terminate(() => {
+
+      console.log('TCP Worker terminated');
+
+    });
+
   }
 
   // Close the main app

@@ -92,8 +92,7 @@ label{
         outline: none;
         box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
     }
-    
-
+    text-align: center;
 
 }
 
@@ -327,7 +326,7 @@ label{
 
     width: 70%;
     height: 100%;
-    background-color: rgb(10, 77, 97);
+    background-color: rgb(10, 97, 43);
 
 }
 
