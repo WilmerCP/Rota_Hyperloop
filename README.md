@@ -1,9 +1,22 @@
 
 # ROTA Hyperloop
 
+Teknofest yarışması için hyperloop treninin çalıştırılmasını sağlayan masaüstü uygulaması
 
 
 
+## Kurulum
+
+Node modules dosyasını oluşturun
+
+```bash
+  npm install
+```
+Python pyserial kütüphanesini indirin
+
+```bash
+  pip3 install pyserial
+```
 
 ## Startup
 
@@ -43,7 +56,3 @@ start_motor,
 stop_motor,
 emergency_stop,
 connect_sensors
-
-
-
-
