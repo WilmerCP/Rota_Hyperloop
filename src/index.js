@@ -42,7 +42,9 @@ app.on("ready", () => {
       nodeIntegration: false,
       preload: path.join(__dirname, 'preload.js')
 
-    }
+    },
+    width: 800,
+    height: 600
   });
 
   mainWindow.loadURL(indexUrl);
@@ -63,8 +65,6 @@ ipcMain.on('command', (e, data) => {
     case 'connect_sensors':
 
       if (connected == false) {
-
-        console.log('hola')
 
         tcp_thread = new Worker(path.join(__dirname, '/tcpClient.js'));
 
