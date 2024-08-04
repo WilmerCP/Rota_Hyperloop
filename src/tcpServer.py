@@ -4,7 +4,7 @@ import socket
 from controller import controller_obj;
 
 s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-s.bind(('localhost',4000))
+s.bind(('localhost',4001))
 s.listen(1)
 
 #This function waits until a client connects

@@ -4,7 +4,19 @@ import time
 import socket
 import json
 
-def startup(message_array):
+shared_array = None
+event_signal = None
+
+def startup(message_array,event):
+
+    ser = None
+    sock = None
+
+    global shared_array
+    shared_array = message_array
+
+    global event_signal
+    event_signal = event
 
     try:
 
@@ -30,7 +42,7 @@ def startup(message_array):
                 # Send the message
                 sent = sock.sendto(line.encode(), server_address)
                 dictionary = json.loads(line)
-                validate(dictionary,message_array)
+                validate(dictionary)
 
 
     except KeyboardInterrupt:
@@ -43,17 +55,43 @@ def startup(message_array):
     
     finally:
 
-        ser.close()
-        sock.close()
         print('Closing socket and serial communication')
+        if ser is not None:
+            ser.close()
 
-def validate(dictionary,message_array):
+        if sock is not None:
+            sock.close()
+
+
+def sendMessage(line):
+    global shared_array
+    global event_signal
+
+    # Encode the line to bytes
+    encoded_line = line.encode('utf-8')
+
+    # Ensure the message fits in the shared array
+    if len(encoded_line) > len(shared_array):
+        raise ValueError("Encoded line is too long for the shared array")
+
+    # Copy the encoded message to the shared array
+    shared_array[:len(encoded_line)] = encoded_line
+
+    # Null-terminate the rest of the shared array
+    shared_array[len(encoded_line):] = b'\x00' * (len(shared_array) - len(encoded_line))
+
+    event_signal.set()
+
+
+
+def validate(dictionary):
 
     if dictionary['data_name'] == 'temp_1':
 
         if float(dictionary['value']) > 60:
 
-            print('temperature 1 is too high, stopping train')
+            sendMessage('temperature 1 is too high, stopping train')
+
             
 
     elif dictionary['data_name'] == 'temp_2':
@@ -61,3 +99,9 @@ def validate(dictionary,message_array):
         if float(dictionary['value']) > 45:
 
             print('temperature 2 is too high, stopping train')
+
+    elif dictionary['data_name'] == 'yaw':
+
+        if float(dictionary['value']) > 20:
+
+            print('The Yaw value is too much, stopping train')
