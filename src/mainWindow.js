@@ -2,7 +2,8 @@ let train = {
 
     up: false,
     levitating: false,
-    moving: false
+    moving: false,
+    breaks: false
 
 }
 
@@ -71,7 +72,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
             sendCommand('stop_levitation');
             levitationButton.classList.remove('active');
-            startButton.classList.remove('active');
             train.levitating = false;
 
         }
@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     impulseButton.addEventListener('click', () => {
 
-        if (train.moving == false) {
+        if (train.moving == false && train.breaks == false) {
 
             sendCommand('start_motor');
             impulseButton.classList.add('active');
@@ -90,23 +90,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
             sendCommand('stop_motor');
             impulseButton.classList.remove('active');
-            startButton.classList.remove('active');
             train.moving = false;
 
         }
 
     });
 
-    startButton.addEventListener('click', () => {
+    breakButton.addEventListener('click', () => {
 
-        if (train.moving == false && train.up == false && train.levitating == false) {
+        if(train.breaks == false){
 
-            sendCommand('start_train');
-            startButton.classList.add('active');
-            levitationButton.classList.add('active');
-            impulseButton.classList.add('active');
-            train.levitating = true;
-            train.moving = true;
+            sendCommand('brake_start');
+            breakButton.classList.add('active');
+            levitationButton.classList.remove('active');
+            impulseButton.classList.remove('active');
+            train.levitating = false;
+            train.moving = false;
+            train.breaks = true;
+
+        }else{
+
+            sendCommand('brake_stop');
+            breakButton.classList.remove('active');
+            train.breaks = false;
 
         }
 
@@ -120,7 +126,6 @@ document.addEventListener("DOMContentLoaded", function () {
         train.levitating = false;
         train.up = false;
 
-        startButton.classList.remove('active');
         levitationButton.classList.remove('active');
         impulseButton.classList.remove('active');
         liftButton.classList.remove('active');
@@ -273,7 +278,7 @@ window.ipc.onData((e, data) => {
 });
 
 const connectButton = document.getElementById('connect');
-const startButton = document.getElementById('start');
+const breakButton = document.getElementById('break');
 const liftButton = document.getElementById('lift');
 const levitationButton = document.getElementById('levitation');
 const impulseButton = document.getElementById('impulse');

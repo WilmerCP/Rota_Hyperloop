@@ -55,4 +55,6 @@ stop_levitation,
 start_motor,
 stop_motor,
 emergency_stop,
-connect_sensors
+connect_sensors,
+brake_start,
+brake_stop
