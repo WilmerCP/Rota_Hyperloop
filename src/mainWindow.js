@@ -230,7 +230,7 @@ let dataHandler = function (json_data) {
 
             case 'pressure':
 
-                printData('pressure', json_data.value + 'kPa');
+                printData('pressure', json_data.value + ' kPa');
 
                 break;
 
@@ -243,6 +243,24 @@ let dataHandler = function (json_data) {
             case 'accesory_battery':
 
                 document.getElementById('accesory_battery').style.width = String(json_data.value * 100 / 16.8) + '%';
+
+                break;
+
+            case 'motor_temperature':
+
+                printData('motor_temperature', json_data.value + ' °C');
+
+                break;
+
+            case 'linear_battery_temperature':
+
+                printData('linear_battery_temperature', json_data.value + ' °C');
+
+                break;
+
+            case 'levitation_battery_temperature':
+
+                printData('levitation_battery_temperature', json_data.value + ' °C');
 
                 break;
 
