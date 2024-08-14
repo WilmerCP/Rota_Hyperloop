@@ -13,7 +13,13 @@ const client = net.createConnection(options);
 
 client.on('connect',()=>{
 
-    client.write('connect_sensors');
+    let formatted_data = {
+
+        'command': 'connect_sensors'
+
+        }
+
+    client.write(JSON.stringify(formatted_data));
     let obj = {'type': 'notification', 'description': 'connected'};
     parentPort.postMessage(obj);
 

@@ -58,7 +58,7 @@ app.on("ready", () => {
 
 });
 
-ipcMain.on('command', (e, data) => {
+ipcMain.on('command', (e, data, param) => {
 
   switch (data) {
 
@@ -105,8 +105,21 @@ ipcMain.on('command', (e, data) => {
     default:
 
       if (connected) {
+      
+        let formatted_data = {
 
-        tcp_thread.postMessage(data);
+        'command': data,
+        'parameter': null
+
+        }
+
+        if(typeof param !== 'undefined'){
+
+          formatted_data.parameter = param;
+
+        }
+
+        tcp_thread.postMessage(JSON.stringify(formatted_data));
 
       }
 

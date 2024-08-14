@@ -8,9 +8,10 @@ let ipc_object = {
 
     },
 
-    'sendCommand' : function(command){
+    'sendCommand' : function(command,param){
 
-        ipcRenderer.send('command', command);
+        console.log(param)
+        ipcRenderer.send('command', command, param);
 
     }
 

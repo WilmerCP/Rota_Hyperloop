@@ -64,9 +64,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (train.levitating == false && train.up == true) {
 
-            sendCommand('start_levitation');
-            levitationButton.classList.add('active');
-            train.levitating = true;
+            if(levitationInput.value.length > 0 && levitationInput.value != '0'){
+
+                sendCommand('start_levitation',levitationInput.value);
+                levitationButton.classList.add('active');
+                train.levitating = true;
+
+            }
 
         } else if (train.levitating == true && train.moving == false) {
 
@@ -82,9 +86,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (train.moving == false && train.breaks == false) {
 
-            sendCommand('start_motor');
-            impulseButton.classList.add('active');
-            train.moving = true;
+            if(impulseInput.value.length > 0 && impulseInput.value != '0'){
+            
+                sendCommand('start_motor',impulseInput.value);
+                impulseButton.classList.add('active');
+                train.moving = true;
+
+            }
 
         } else {
 
@@ -302,9 +310,11 @@ const levitationButton = document.getElementById('levitation');
 const impulseButton = document.getElementById('impulse');
 const stopButton = document.getElementById('stop');
 
+const levitationInput = document.getElementById('levitation_frecuency');
+const impulseInput = document.getElementById('linear_frecuency');
 
-let sendCommand = function (command) {
+let sendCommand = function (command,param) {
 
-    window.ipc.sendCommand(command);
+    window.ipc.sendCommand(command,param);
 
 };

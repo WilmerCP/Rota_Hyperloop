@@ -2,6 +2,7 @@
 #This path will be used to command the train (Startup,Emergency stop,etc)
 import socket
 from controller import controller_obj;
+import json
 
 s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 s.bind(('localhost',4001))
@@ -22,8 +23,9 @@ try:
 
             if data:
 
-                controller_obj.handler(data.decode('utf-8'))
-                print(data.decode('utf-8'))
+                data_dictionary = json.loads(data.decode('utf-8'))
+                controller_obj.handler(data_dictionary['command'])
+                print(data_dictionary)
         
             else:
                 print('Connection closed')
