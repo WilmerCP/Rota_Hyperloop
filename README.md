@@ -3,7 +3,7 @@
 
 Teknofest yarışması için hyperloop treninin çalıştırılmasını sağlayan masaüstü uygulaması
 
-
+![User Interface Screenshot](https://github.com/WilmerCP/Rota_Hyperloop/blob/8652a28168ea23a0773a2abe2d9306ae9f81a6b8/interface.png)
 
 ## Kurulum
 
@@ -28,7 +28,7 @@ Arayüz'ü başlatmak için:
 Raspberry Pi sunucu:
 
 ```bash
-  python3 src/tcpServer.py:
+  python3 src/tcpServer.py
 ```
 
 ## JSON message format
