@@ -3,7 +3,7 @@
 
 Teknofest yarışması için hyperloop treninin çalıştırılmasını sağlayan masaüstü uygulaması
 
-<img src="https://github.com/WilmerCP/Rota_Hyperloop/blob/8652a28168ea23a0773a2abe2d9306ae9f81a6b8/interface.png" width="480" height="180">
+<img src="https://github.com/WilmerCP/Rota_Hyperloop/blob/8652a28168ea23a0773a2abe2d9306ae9f81a6b8/interface.png" width="480" height="360">
 
 ## Kurulum
 
